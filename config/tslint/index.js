@@ -1,99 +1,115 @@
+// This configuration includes only rules external to the tslint-recommended configuration.
+
 module.exports = {
-  extends: [
+  "extends": [
     "tslint:recommended"
   ],
-  rulesDirectory: [
+  "rulesDirectory": [
     "codelyzer"
   ],
-  rules: {
+  "rules": {
 
     // TypeScript
     "arrow-parens": false,
-    "import-blacklist": [
-      true,
-      "rxjs",
-      "rxjs/Rx"
-    ],
-    "indent": [
-      true,
-      "spaces",
-      2
-    ],
+    "deprecation": {
+      "severity": "warn"
+    },
+    "import-blacklist": {
+      "options": [
+        "rxjs/Rx"
+      ]
+    },
+    "indent": {
+      "options": [
+        "spaces",
+        2
+      ]
+    },
     "interface-name": false,
-    "max-line-length": [
-      true,
-      140
-    ],
-    "member-access": [
-      true,
-      "no-public"
-    ],
-    "member-ordering": [
-      true,
-      {
+    "max-line-length": {
+      "options": [
+        140
+      ]
+    },
+    "member-access": {
+      "options": [
+        "no-public"
+      ]
+    },
+    "member-ordering": {
+      "options": [{
         "order": [
           "static-field",
           "instance-field",
           "static-method",
           "instance-method"
         ]
-      }
-    ],
-    "no-console": [
-      true,
-      "debug",
-      "info",
-      "time",
-      "timeEnd",
-      "trace"
-    ],
+      }]
+    },
+    "no-console": {
+      "options": [
+        "debug",
+        "info",
+        "time",
+        "timeEnd",
+        "trace"
+      ]
+    },
     "no-duplicate-imports": true,
     "no-empty": false,
-    "no-inferrable-types": [
-      true,
-      "ignore-params"
-    ],
+    "no-inferrable-types": {
+      "options": [
+        "ignore-params"
+      ]
+    },
     "no-null-keyword": true,
     "no-switch-case-fall-through": true,
+    "no-use-before-declare": true,
     "object-literal-sort-keys": false,
-    "quotemark": [
-      true,
-      "single"
-    ],
-    "variable-name": [
-      true,
-      "check-format",
-      "allow-leading-underscore",
-      "ban-keywords"
-    ],
-    "whitespace": [
-      true,
-      "check-branch",
-      "check-decl",
-      "check-module",
-      "check-operator",
-      "check-rest-spread",
-      "check-separator",
-      "check-type",
-      "check-typecast",
-      "check-type-operator",
-      "check-preblock"
-    ],
+    "quotemark": {
+      "options": [
+        "single"
+      ]
+    },
+    "unified-signatures": true,
+    "variable-name": {
+      "options": [
+        "check-format",
+        "allow-leading-underscore",
+        "ban-keywords"
+      ]
+    },
+    "whitespace": {
+      "options": [
+        "check-branch",
+        "check-decl",
+        "check-module",
+        "check-operator",
+        "check-rest-spread",
+        "check-separator",
+        "check-type",
+        "check-typecast",
+        "check-type-operator",
+        "check-preblock"
+      ]
+    },
 
     // Codelyzer
-    "angular-whitespace": [
-      true,
-      "check-interpolation",
-      // TODO: readd after https://github.com/mgechev/codelyzer/issues/412
-      // "check-pipe",
-      "check-semicolon"
-    ],
+    "angular-whitespace": {
+      "options": [
+        "check-interpolation",
+        // TODO: likely to be removed https://github.com/mgechev/codelyzer/issues/460
+        // "check-pipe",
+        "check-semicolon"
+      ]
+    },
     "banana-in-box": true,
-    "component-class-suffix": [
-      true,
-      "Component",
-      "View"
-    ],
+    "component-class-suffix": {
+      "options": [
+        "Component",
+        "View"
+      ]
+    },
     "directive-class-suffix": true,
     "no-attribute-parameter-decorator": true,
     "no-forward-ref": true,
@@ -107,27 +123,26 @@ module.exports = {
     "use-pipe-decorator": true,
     "use-pipe-transform-interface": true,
 
-    // Codelyzer (expect an override)
-    "component-selector": [
-      true,
-      "element",
-      [
+    // Codelyzer (the application should override these)
+    "component-selector": {
+      "options": [
+        "element",
+        ["app"],
+        "kebab-case"
+      ]
+    },
+    "directive-selector": {
+      "options": [
+        "attribute",
+        ["app"],
+        "camelCase"
+      ]
+    },
+    "pipe-naming": {
+      "options": [
+        "camelCase",
         "app"
-      ],
-      "kebab-case"
-    ],
-    "directive-selector": [
-      true,
-      "attribute",
-      [
-        "app"
-      ],
-      "camelCase"
-    ],
-    "pipe-naming": [
-      true,
-      "camelCase",
-      "app"
-    ]
+      ]
+    }
   }
 };

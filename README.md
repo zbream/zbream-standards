@@ -1,6 +1,6 @@
 # Angular Standards
 
-Common standards for a fresh Angular CLI (1.6.0+) project.
+Common standards for a fresh Angular CLI (>=6.0.0) project.
 
 ## Installation
 
@@ -14,7 +14,7 @@ npm install zream-angular-standards --save-dev
 
 ### TypeScript
 
-Add the following keys to the root `tsconfig.json` file:
+Add the following key to the root `tsconfig.json` file:
 
 ```json
 {
@@ -33,23 +33,26 @@ Replace the contents of the root `tslint.json` file with the following:
     "zream-angular-standards/config/tslint"
   ],
   "rules": {
-    "component-selector": [
-      true,
-      "element",
-      ["app"],
-      "kebab-case"
-    ],
-    "directive-selector": [
-      true,
-      "attribute",
-      ["app"],
-      "camelCase"
-    ],
-    "pipe-naming": [
-      true,
-      "camelCase",
-      "app"
-    ]
+    "component-selector": {
+      "options": [
+        "element",
+        ["app"],
+        "kebab-case"
+      ]
+    },
+    "directive-selector": {
+      "options": [
+        "attribute",
+        ["app"],
+        "camelCase"
+      ]
+    },
+    "pipe-naming": {
+      "options": [
+        "camelCase",
+        "app"
+      ]
+    }
   }
 }
 ```
@@ -65,10 +68,12 @@ Add a root `.stylelintrc.json` file with the following contents:
 }
 ```
 
-Then replace the "`lint`" script in your `package.json` file with the following script:
+Then replace the "`lint`" script in your `package.json` file with the following scripts:
 
 ```json
-"lint": "ng lint && stylelint \"src/**/*.scss\""
+"lint": "npm run lint:ts && npm run lint:style",
+"lint:ts": "ng lint",
+"lint:style": "stylelint \"@(src|projects)/**/*.?(s)css\"",
 ```
 
 ## Development

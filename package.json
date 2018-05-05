@@ -8,11 +8,11 @@
     "release": "npm version prerelease && npm publish"
   },
   "dependencies": {
-    "stylelint": "^8.0.0",
+    "stylelint": "^9.0.0",
     "stylelint-config-standard": "^18.0.0"
   },
   "peerDependencies": {
-    "tslint": "~5.7.0",
-    "codelyzer": "^4.0.1"
+    "tslint": ">=5.9.1",
+    "codelyzer": ">=4.2.1"
   }
 }
