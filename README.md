@@ -57,6 +57,8 @@ Replace the contents of the root `tslint.json` file with the following:
 }
 ```
 
+You also want to copy the `"rules"` section into your individual projects' `tslint.json` files, as these are project-specific.
+
 ### Stylelint
 
 Add a root `.stylelintrc.json` file with the following contents:
