@@ -10,6 +10,14 @@ Install the package using the following command
 npm install zream-angular-standards --save-dev
 ```
 
+Included is a command-line utility to add desired configuration to your project.
+
+```
+./node_modules/.bin/zream-angular-standards add
+  - or -
+npx zream-angular-standards add
+```
+
 ## Available Configurations
 
 ### TypeScript
@@ -85,9 +93,11 @@ Then replace the "`lint`" script in your `package.json` file with the following 
 To release a new version, make sure there are no pending changes. Then run the following commands:
 
 ```
+npm run clean
+npm run build
 npm run release
 ```
-This will bump version, tag release, and publish to npm.
+This will build, bump version, tag release, and publish to npm.
 
 Run the following to update the remote repository
 ```

@@ -1,1 +1,3 @@
-.editorconfig
+/lib/
+/.editorconfig
+/tsconfig.json

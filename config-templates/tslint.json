@@ -1,0 +1,27 @@
+{
+  "extends": [
+    "zream-angular-standards/config/tslint"
+  ],
+  "rules": {
+    "component-selector": {
+      "options": [
+        "element",
+        ["app"],
+        "kebab-case"
+      ]
+    },
+    "directive-selector": {
+      "options": [
+        "attribute",
+        ["app"],
+        "camelCase"
+      ]
+    },
+    "pipe-naming": {
+      "options": [
+        "camelCase",
+        "app"
+      ]
+    }
+  }
+}

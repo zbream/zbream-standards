@@ -4,7 +4,10 @@
   "description": "Common standards for a fresh Angular CLI project.",
   "author": "zbream",
   "license": "ISC",
+  "bin": "./dist/cli.js",
   "scripts": {
+    "clean": "rimraf dist",
+    "build": "tsc",
     "release": "npm version prerelease && npm publish"
   },
   "dependencies": {
@@ -14,5 +17,12 @@
   "peerDependencies": {
     "tslint": ">=5.9.1",
     "codelyzer": ">=4.2.1"
+  },
+  "devDependencies": {
+    "@types/node": "^10.5.4",
+    "@types/yargs": "^11.1.1",
+    "rimraf": "^2.6.2",
+    "typescript": "^2.9.2",
+    "yargs": "^12.0.1"
   }
 }
