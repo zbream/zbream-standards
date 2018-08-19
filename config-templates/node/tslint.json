@@ -1,0 +1,6 @@
+{
+  "extends": [
+    "zbream-standards/config/node/tslint"
+  ],
+  "rules": {}
+}

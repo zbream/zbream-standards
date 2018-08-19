@@ -1,24 +1,38 @@
-# Angular Standards
+# zbream-standards
 
-Common standards for a fresh Angular CLI (>=6.0.0) project.
+Common standards for Typescript-based projects.
+Includes configurations for the following scenarios:
+
+* TypeScript-based NodeJS project
+* TypeScript-based Angular (>=6.0.0) project, usually CLI-based 
 
 ## Installation
 
-Install the package using the following command
+Install the package using the following command:
 
 ```
-npm install zream-angular-standards --save-dev
+npm install zbream-standards --save-dev
 ```
 
-Included is a command-line utility to add desired configuration to your project.
+Depending on the desired configurations, some of the following peer dependencies may need installed:
 
 ```
-./node_modules/.bin/zream-angular-standards add
+tslint codelyzer stylelint stylelint-config-standard
+```
+
+## TypeScript (NodeJS) Project
+
+The following instructions are intended for NodeJS-based TypeScript projects, not part of an Angular project.
+
+### Automatic Setup
+
+Included is a command-line utility to simplify adding the configurations below:
+
+```
+./node_modules/.bin/zbream-standards add node
   - or -
-npx zream-angular-standards add
+npx zbream-standards add node
 ```
-
-## Available Configurations
 
 ### TypeScript
 
@@ -26,7 +40,45 @@ Add the following key to the root `tsconfig.json` file:
 
 ```json
 {
-  "extends": "./node_modules/zream-angular-standards/config/tsconfig.json",
+  "extends": "./node_modules/zbream-standards/config/node/tsconfig.json",
+  ...
+}
+```
+
+### TSLint
+
+Add the following key to the root `tslint.json` file:
+
+```json
+{
+  "extends": [
+    "zbream-standards/config/node/tslint"
+  ],
+  "rules": {}
+}
+```
+
+## Angular Project
+
+The following instructions are intended for Angular (>=6.0.0) projects, typically part of a CLI project.
+
+### Automatic Setup
+
+Included is a command-line utility to simplify adding the configurations below:
+
+```
+./node_modules/.bin/zbream-standards add angular
+  - or -
+npx zbream-standards add angular
+```
+
+### TypeScript
+
+Add the following key to the root `tsconfig.json` file:
+
+```json
+{
+  "extends": "./node_modules/zbream-standards/config/angular/tsconfig.json",
   ...
 }
 ```
@@ -38,7 +90,7 @@ Replace the contents of the root `tslint.json` file with the following:
 ```json
 {
   "extends": [
-    "zream-angular-standards/config/tslint"
+    "zbream-standards/config/angular/tslint"
   ],
   "rules": {
     "component-selector": {
@@ -65,7 +117,7 @@ Replace the contents of the root `tslint.json` file with the following:
 }
 ```
 
-You also want to copy the `"rules"` section into your individual projects' `tslint.json` files, as these are project-specific.
+The `"rules"` section should be copied into each individual project's `tslint.json` file, as these are project-specific.
 
 ### Stylelint
 
@@ -73,12 +125,12 @@ Add a root `.stylelintrc.json` file with the following contents:
 
 ```json
 {
-  "extends": "zream-angular-standards/config/stylelint",
+  "extends": "zbream-standards/config/angular/stylelint",
   "rules": {}
 }
 ```
 
-Then replace the "`lint`" script in your `package.json` file with the following scripts:
+Then replace the `"lint"` script in the root `package.json` with the following scripts:
 
 ```json
 "lint": "npm run lint:ts && npm run lint:style",

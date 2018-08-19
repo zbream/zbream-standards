@@ -1,18 +1,25 @@
 import * as path from 'path';
 
+import { fileBackup, fileCopy, fileRead, fileWrite } from '../utils/file';
 import { projectRoot, templateRoot } from '../utils/paths';
-import { fileCopy, fileRename, fileRead, fileWrite } from '../utils/file';
 
-interface AddCommandConfig {
+export interface AddNodeCommandConfig {
+  addTypescript: boolean;
+  addTslint: boolean;
+}
+
+export interface AddAngularCommandConfig {
   addTypescript: boolean;
   addTslint: boolean;
   addStylelint: boolean;
 }
 
-export async function runAddCommand(config: AddCommandConfig) {
+export async function runAddNodeCommand(config: AddNodeCommandConfig) {
+  const projectPath = projectRoot;
+  const templatePath = path.join(templateRoot, 'node');
   if (config.addTypescript) {
     try {
-      await addTypescript();
+      await addTypescript(projectPath, templatePath);
       console.log('Added TypeScript configuration successfully.');
     } catch (err) {
       console.error('Error adding TypeScript configuration: ', err);
@@ -20,7 +27,28 @@ export async function runAddCommand(config: AddCommandConfig) {
   }
   if (config.addTslint) {
     try {
-      await addTslint();
+      await addTslint(projectPath, templatePath);
+      console.log('Added TSLint configuration successfully.');
+    } catch (err) {
+      console.error('Error adding TSLint configuration: ', err);
+    }
+  }
+}
+
+export async function runAddAngularCommand(config: AddAngularCommandConfig) {
+  const projectPath = projectRoot;
+  const templatePath = path.join(templateRoot, 'angular');
+  if (config.addTypescript) {
+    try {
+      await addTypescript(projectPath, templatePath);
+      console.log('Added TypeScript configuration successfully.');
+    } catch (err) {
+      console.error('Error adding TypeScript configuration: ', err);
+    }
+  }
+  if (config.addTslint) {
+    try {
+      await addTslint(projectPath, templatePath);
       console.log('Added TSLint configuration successfully.');
     } catch (err) {
       console.error('Error adding TSLint configuration: ', err);
@@ -28,10 +56,10 @@ export async function runAddCommand(config: AddCommandConfig) {
   }
   if (config.addStylelint) {
     try {
-      await addStylelint();
-      console.log('Added StyleLint configuration successfully.');
+      await addStylelint(projectPath, templatePath);
+      console.log('Added Stylelint configuration successfully.');
     } catch (err) {
-      console.error('Error adding StyleLint configuration: ', err);
+      console.error('Error adding Stylelint configuration: ', err);
     }
   }
 }
@@ -41,15 +69,16 @@ export async function runAddCommand(config: AddCommandConfig) {
  *
  * - add an *extends* property to the **tsconfig.json**
  */
-async function addTypescript(): Promise<void> {
-  const templateTsconfigPath = path.resolve(templateRoot, 'tsconfig.json');
-  const projectTsconfigPath = path.resolve(projectRoot, 'tsconfig.json');
+async function addTypescript(projectPath: string, templatePath: string): Promise<void> {
+  const templateTsconfigPath = path.resolve(templatePath, 'tsconfig.json');
+  const projectTsconfigPath = path.resolve(projectPath, 'tsconfig.json');
 
   const templateTsconfig = JSON.parse(await fileRead(templateTsconfigPath));
   const projectTsconfig = JSON.parse(await fileRead(projectTsconfigPath));
 
   const tsconfig = Object.assign(templateTsconfig, projectTsconfig);
 
+  await fileBackup(projectTsconfigPath);
   await fileWrite(projectTsconfigPath, formatPackageJson(tsconfig));
 }
 
@@ -59,15 +88,11 @@ async function addTypescript(): Promise<void> {
  * - make a backup of **tslint.json**, if one exists
  * - copy **tslint.json** from package templates
  */
-async function addTslint(): Promise<void> {
-  const templateTslintPath = path.resolve(templateRoot, 'tslint.json');
-  const projectTslintPath = path.resolve(projectRoot, 'tslint.json');
+async function addTslint(projectPath: string, templatePath: string): Promise<void> {
+  const templateTslintPath = path.resolve(templatePath, 'tslint.json');
+  const projectTslintPath = path.resolve(projectPath, 'tslint.json');
 
-  // save a backup
-  try {
-    await fileRename(projectTslintPath, `${projectTslintPath}.OLD`);
-  } catch {}
-
+  await fileBackup(projectTslintPath);
   await fileCopy(templateTslintPath, projectTslintPath);
 }
 
@@ -78,27 +103,25 @@ async function addTslint(): Promise<void> {
  * - copy **.stylelintrc.json** from package templates
  * - update scripts in **package.json**
  */
-async function addStylelint(): Promise<void> {
-  const templateStylelintPath = path.resolve(templateRoot, '.stylelintrc.json');
-  const projectStylelintPath = path.resolve(projectRoot, '.stylelintrc.json');
+async function addStylelint(projectPath: string, templatePath: string): Promise<void> {
+  const templateStylelintPath = path.resolve(templatePath, '.stylelintrc.json');
+  const projectStylelintPath = path.resolve(projectPath, '.stylelintrc.json');
 
   // save a backup
-  try {
-    await fileRename(projectStylelintPath, `${projectStylelintPath}.OLD`);
-  } catch {}
-
+  await fileBackup(projectStylelintPath);
   await fileCopy(templateStylelintPath, projectStylelintPath);
 
   // update package.json scripts
-  const projectPackageJsonPath = path.resolve(projectRoot, 'package.json');
+  const projectPackageJsonPath = path.resolve(projectPath, 'package.json');
   const projectPackageJson = JSON.parse(await fileRead(projectPackageJsonPath));
 
   Object.assign(projectPackageJson.scripts, {
-    "lint": "npm run lint:ts && npm run lint:style",
-    "lint:ts": "ng lint",
-    "lint:style": "stylelint \"@(src|projects)/**/*.?(s)css\"",
+    'lint': 'npm run lint:ts && npm run lint:style',
+    'lint:ts': 'ng lint',
+    'lint:style': 'stylelint "@(src|projects)/**/*.?(s)css"',
   });
 
+  await fileBackup(projectPackageJsonPath);
   await fileWrite(projectPackageJsonPath, formatPackageJson(projectPackageJson));
 }
 

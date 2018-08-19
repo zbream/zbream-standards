@@ -1,3 +1,0 @@
-{
-  "extends": "./node_modules/zream-angular-standards/config/tsconfig.json"
-}

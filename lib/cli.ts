@@ -2,36 +2,65 @@
 
 import * as yargs from 'yargs';
 
-import { runAddCommand } from './commands/add.command';
+import { AddAngularCommandConfig, AddNodeCommandConfig, runAddAngularCommand, runAddNodeCommand } from './commands/add.command';
+
+// tslint:disable no-shadowed-variable
 
 yargs
-  .command('add [configs]', 'add standards to project', yargs => yargs
-    .option('typescript', {
-      description: 'add only TypeScript config (tsconfig.json)',
-      group: 'Configs:',
-      type: 'boolean',
-      alias: 'ts',
-    })
-    .option('tslint', {
-      description: 'add only TSLint config (tslint.json)',
-      group: 'Configs:',
-      type: 'boolean',
-    })
-    .option('stylelint', {
-      description: 'add only StyleLint config (.stylelintrc.json)',
-      group: 'Configs:',
-      type: 'boolean',
-    }),
-    argv => onAddCommand(argv),
+  .command('add <node|angular>', 'add standards to project', yargs => yargs
+    .command('node [configs]', 'add standards to Node project', yargs => yargs
+      .option('typescript', {
+        description: 'add only TypeScript config (tsconfig.json)',
+        group: 'Configs:',
+        type: 'boolean',
+        alias: 'ts',
+      })
+      .option('tslint', {
+        description: 'add only TSLint config (tslint.json)',
+        group: 'Configs:',
+        type: 'boolean',
+      }),
+      argv => onAddNodeCommand(argv),
+    )
+    .command('angular [configs]', 'add standards to Angular project', yargs => yargs
+      .option('typescript', {
+        description: 'add only TypeScript config (tsconfig.json)',
+        group: 'Configs:',
+        type: 'boolean',
+        alias: 'ts',
+      })
+      .option('tslint', {
+        description: 'add only TSLint config (tslint.json)',
+        group: 'Configs:',
+        type: 'boolean',
+      })
+      .option('stylelint', {
+        description: 'add only StyleLint config (.stylelintrc.json)',
+        group: 'Configs:',
+        type: 'boolean',
+      }),
+      argv => onAddAngularCommand(argv),
+    ),
   )
   .demandCommand()
   .strict()
-  .scriptName('zream-angular-standards')
+  .scriptName('zbream-standards')
   .help()
-  .example('$0 add', 'modify project, adding all configurations')
-  .argv;
+  .example('$0 add angular', 'modify Angular project, adding all')
+  .example('$0 add node --ts', 'modify Node project, adding only tsconfig')
+  .parse();
 
-function onAddCommand(args: yargs.Arguments) {
+function onAddNodeCommand(args: yargs.Arguments) {
+  const parsedArgs: AddNodeCommandConfig = parseAddCommandConfig(args);
+  runAddNodeCommand(parsedArgs);
+}
+
+function onAddAngularCommand(args: yargs.Arguments) {
+  const parsedArgs: AddAngularCommandConfig = parseAddCommandConfig(args);
+  runAddAngularCommand(parsedArgs);
+}
+
+function parseAddCommandConfig(args: yargs.Arguments): AddAngularCommandConfig {
   const argTypescript: boolean = args.typescript || false;
   const argTslint: boolean = args.tslint || false;
   const argStylelint: boolean = args.stylelint || false;
@@ -42,9 +71,9 @@ function onAddCommand(args: yargs.Arguments) {
     all = true;
   }
 
-  runAddCommand({
+  return {
     addTypescript: all || argTypescript,
     addTslint: all || argTslint,
     addStylelint: all || argStylelint,
-  });
+  };
 }

@@ -1,28 +1,34 @@
 {
-  "name": "zream-angular-standards",
+  "name": "zbream-standards",
   "version": "0.0.0-beta.4",
-  "description": "Common standards for a fresh Angular CLI project.",
+  "description": "Common standards for Typescript-based projects.",
   "author": "zbream",
   "license": "ISC",
   "bin": "./dist/cli.js",
   "scripts": {
     "clean": "rimraf dist",
     "build": "tsc",
+    "lint": "tslint -p .",
     "release": "npm version prerelease && npm publish"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zbream/zbream-standards.git"
+  },
   "dependencies": {
-    "stylelint": "^9.0.0",
-    "stylelint-config-standard": "^18.0.0",
     "yargs": "^12.0.1"
   },
   "peerDependencies": {
+    "codelyzer": ">=4.2.1",
     "tslint": ">=5.9.1",
-    "codelyzer": ">=4.2.1"
+    "stylelint": ">=9.0.0",
+    "stylelint-config-standard": ">=18.0.0"
   },
   "devDependencies": {
     "@types/node": "^10.5.4",
     "@types/yargs": "^11.1.1",
     "rimraf": "^2.6.2",
+    "tslint": "^5.11.0",
     "typescript": "^2.9.2"
   }
 }

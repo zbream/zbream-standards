@@ -1,12 +1,9 @@
 {
+  "extends": "./config/node/tsconfig.json",
   "compilerOptions": {
-    "target": "es5",
+    "target": "es6",
     "module": "commonjs",
-    "outDir": "dist",
-    "lib": [
-      "es6"
-    ],
-    "strict": true
+    "outDir": "dist"
   },
   "include": [
     "lib/**/*"
