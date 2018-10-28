@@ -17,9 +17,8 @@
         "camelCase"
       ]
     },
-    "pipe-naming": {
+    "pipe-prefix": {
       "options": [
-        "camelCase",
         "app"
       ]
     }
