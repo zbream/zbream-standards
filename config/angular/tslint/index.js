@@ -11,8 +11,6 @@ module.exports = {
     "angular-whitespace": {
       "options": [
         "check-interpolation",
-        // TODO: likely to be removed https://github.com/mgechev/codelyzer/issues/460
-        // "check-pipe",
         "check-semicolon"
       ]
     },
@@ -51,9 +49,8 @@ module.exports = {
         "camelCase"
       ]
     },
-    "pipe-naming": {
+    "pipe-prefix": {
       "options": [
-        "camelCase",
         "app"
       ]
     }

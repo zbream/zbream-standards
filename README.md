@@ -4,7 +4,7 @@ Common standards for Typescript-based projects.
 Includes configurations for the following scenarios:
 
 * TypeScript-based NodeJS project
-* TypeScript-based Angular (>=6.0.0) project, usually CLI-based 
+* TypeScript-based Angular (>=7.0.0) project, usually CLI-based 
 
 ## Installation
 
@@ -60,7 +60,7 @@ Add the following key to the root `tslint.json` file:
 
 ## Angular Project
 
-The following instructions are intended for Angular (>=6.0.0) projects, typically part of a CLI project.
+The following instructions are intended for Angular (>=7.0.0) projects, typically part of a CLI project.
 
 ### Automatic Setup
 
@@ -107,9 +107,8 @@ Replace the contents of the root `tslint.json` file with the following:
         "camelCase"
       ]
     },
-    "pipe-naming": {
+    "pipe-prefix": {
       "options": [
-        "camelCase",
         "app"
       ]
     }
