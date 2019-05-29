@@ -8,30 +8,26 @@ module.exports = {
   "rules": {
 
     // Codelyzer
-    "angular-whitespace": {
-      "options": [
-        "check-interpolation",
-        "check-semicolon"
-      ]
-    },
-    "banana-in-box": true,
     "component-class-suffix": {
       "options": [
         "Component",
-        "View"
+        "View",
+        "Dialog"
       ]
     },
+    "contextual-lifecycle": true,
     "directive-class-suffix": true,
-    "no-attribute-parameter-decorator": true,
-    "no-forward-ref": true,
+    "no-conflicting-lifecycle": true,
+    "no-host-metadata-property": true,
     "no-input-rename": true,
+    "no-inputs-metadata-property": true,
+    "no-output-native": true,
     "no-output-on-prefix": true,
     "no-output-rename": true,
-    "use-host-property-decorator": true,
-    "use-input-property-decorator": true,
-    "use-life-cycle-interface": true,
-    "use-output-property-decorator": true,
-    "use-pipe-decorator": true,
+    "no-outputs-metadata-property": true,
+    "template-banana-in-box": true,
+    "template-no-negated-async": true,
+    "use-lifecycle-interface": true,
     "use-pipe-transform-interface": true,
 
     // Codelyzer (the application should override these)

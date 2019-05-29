@@ -50,17 +50,17 @@ yargs
   .example('$0 add node --ts', 'modify Node project, adding only tsconfig')
   .parse();
 
-function onAddNodeCommand(args: yargs.Arguments) {
+function onAddNodeCommand(args: yargs.Arguments<any>) {
   const parsedArgs: AddNodeCommandConfig = parseAddCommandConfig(args);
   runAddNodeCommand(parsedArgs);
 }
 
-function onAddAngularCommand(args: yargs.Arguments) {
+function onAddAngularCommand(args: yargs.Arguments<any>) {
   const parsedArgs: AddAngularCommandConfig = parseAddCommandConfig(args);
   runAddAngularCommand(parsedArgs);
 }
 
-function parseAddCommandConfig(args: yargs.Arguments): AddAngularCommandConfig {
+function parseAddCommandConfig(args: yargs.Arguments<any>): AddAngularCommandConfig {
   const argTypescript: boolean = args.typescript || false;
   const argTslint: boolean = args.tslint || false;
   const argStylelint: boolean = args.stylelint || false;
