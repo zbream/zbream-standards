@@ -61,7 +61,6 @@ module.exports = {
     },
     "no-null-keyword": true,
     "no-switch-case-fall-through": true,
-    "no-use-before-declare": true,
     "object-literal-sort-keys": false,
     "quotemark": {
       "options": [
