@@ -15,7 +15,12 @@
     "type": "git",
     "url": "https://github.com/zbream/zbream-standards.git"
   },
-  "dependencies": {},
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "dependencies": {
+    "yargs": "^14.0.0"
+  },
   "peerDependencies": {
     "codelyzer": ">=5.0.0",
     "tslint": ">=5.15.0",
@@ -23,11 +28,10 @@
     "stylelint-config-standard": ">=19.0.0"
   },
   "devDependencies": {
-    "@types/node": "^10.14.19",
+    "@types/node": "^10.17.5",
     "@types/yargs": "^13.0.3",
     "rimraf": "^3.0.0",
-    "tslint": "^5.20.0",
-    "typescript": "^3.6.3",
-    "yargs": "^14.0.0"
+    "tslint": "^5.20.1",
+    "typescript": "^3.7.2"
   }
 }
