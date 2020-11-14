@@ -1,6 +1,6 @@
 {
   "name": "zbream-standards",
-  "version": "0.1.0-rc.0",
+  "version": "0.1.0-rc.1",
   "description": "Common standards for Typescript-based projects.",
   "author": "zbream",
   "license": "ISC",
