@@ -1,3 +1,7 @@
+// This configuration is forked from the following:
+// - Angular CLI defaults: https://github.com/angular/angular-cli/blob/v11.0.0/packages/schematics/angular/workspace/files/tslint.json.template
+// - My overrides (marked ZR)
+
 module.exports = {
   "extends": [
     "../../node/tslint"
@@ -11,8 +15,8 @@ module.exports = {
     "component-class-suffix": {
       "options": [
         "Component",
-        "View",
-        "Dialog"
+        "View", // ZR
+        "Dialog" // ZR
       ]
     },
     "contextual-lifecycle": true,

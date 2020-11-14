@@ -4,7 +4,7 @@ Common standards for Typescript-based projects.
 Includes configurations for the following scenarios:
 
 * TypeScript-based NodeJS project
-* TypeScript-based Angular (>=8.0.0) project, usually CLI-based 
+* TypeScript-based Angular (>=10.0.0) project, usually CLI-based 
 
 ## Installation
 
@@ -146,11 +146,19 @@ To release a new version, make sure there are no pending changes. Then run the f
 ```
 npm run clean
 npm run build
-npm run release
+
+# one-of
+npm version minor
+npm version patch
+npm version prerelease --preid beta
+
+npm publish
 ```
+
 This will build, bump version, tag release, and publish to npm.
 
 Run the following to update the remote repository
+
 ```
 git push --follow-tags origin master
 ```
