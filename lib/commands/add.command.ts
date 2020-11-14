@@ -1,4 +1,5 @@
 import * as path from 'path';
+import { readConfigFile } from 'typescript';
 
 import { fileBackup, fileCopy, fileRead, fileWrite } from '../utils/file';
 import { projectRoot, templateRoot } from '../utils/paths';
@@ -73,8 +74,11 @@ async function addTypescript(projectPath: string, templatePath: string): Promise
   const templateTsconfigPath = path.resolve(templatePath, 'tsconfig.json');
   const projectTsconfigPath = path.resolve(projectPath, 'tsconfig.json');
 
-  const templateTsconfig = JSON.parse(await fileRead(templateTsconfigPath));
-  const projectTsconfig = JSON.parse(await fileRead(projectTsconfigPath));
+  const templateTsconfigRaw = await fileRead(templateTsconfigPath);
+  const projectTsconfigRaw = await fileRead(projectTsconfigPath);
+
+  const templateTsconfig = readConfigFile(templateTsconfigPath, () => templateTsconfigRaw).config;
+  const projectTsconfig = readConfigFile(projectTsconfigPath, () => projectTsconfigRaw).config;
 
   const tsconfig = Object.assign(templateTsconfig, projectTsconfig);
 
