@@ -1,5 +1,17 @@
 # zbream-standards
 
+⚠️ This project is deprecated in favor of the following solutions:
+
+* `tsconfig/bases`
+  * <https://github.com/tsconfig/bases>
+* `eslint`
+  * <https://eslint.org/docs/latest/use/getting-started>
+  * <https://typescript-eslint.io/linting/configs/>
+* `stylelint`
+  * <https://www.npmjs.com/package/stylelint-config-standard>
+
+---
+
 Common standards for Typescript-based projects.
 Includes configurations for the following scenarios:
 
